@@ -1,12 +1,12 @@
 using Amazon.Lambda.Core;
 
-[assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.SystemTextJson.DefaultLambdaJsonSerializer))]
 
 namespace SimpleAWSLambdaProject;
 
 public class Function
 {
-    // Run Mock Lambda Test Tool profile and pass a JSON Object.
+    // Putting Serializer at the method level instead of assembly level. Useful if more than one function.
+    [LambdaSerializer(typeof(Amazon.Lambda.Serialization.SystemTextJson.DefaultLambdaJsonSerializer))]
     public string FunctionHandler(InvokedWithData input, ILambdaContext context)
     {
         return $"Namaste, {input.FirstName} {input.LastName}!";
